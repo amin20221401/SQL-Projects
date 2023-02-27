@@ -20,3 +20,5 @@ GROUP BY location, population
 ORDER BY PercentagePopulationInfected DESC
 
 
+
+
