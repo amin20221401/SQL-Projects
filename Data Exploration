@@ -11,4 +11,12 @@ FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths`
 WHERE location LIKE '%Canada%'
 ORDER BY 1,2
 
+-- Finding the highest infection rate at countries compared to population. Line 18 could be optional and we can put each country.
+
+SELECT location, max(total_cases) AS HighestInfectionRate, population, max((total_cases / population)) * 100 AS PercentagePopulationInfected
+FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths`
+--WHERE location LIKE '%Canada%'
+GROUP BY location, population
+ORDER BY PercentagePopulationInfected DESC
+
 
