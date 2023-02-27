@@ -1,0 +1,4 @@
+-- Looking at the data
+
+SELECT location, date, total_cases, new_cases, total_deaths, population
+FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths` LIMIT 1000
