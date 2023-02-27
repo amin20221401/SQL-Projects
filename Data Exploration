@@ -16,8 +16,34 @@ ORDER BY 1,2
 SELECT location, max(total_cases) AS HighestInfectionRate, population, max((total_cases / population)) * 100 AS PercentagePopulationInfected
 FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths`
 --WHERE location LIKE '%Canada%'
+WHERE continent IS NOT null
 GROUP BY location, population
 ORDER BY PercentagePopulationInfected DESC
+
+-- Indicating countries with highest death count per population.
+
+SELECT location, MAX(total_deaths) AS TotalDeathCount
+FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths`
+--WHERE location LIKE '%Canada%'
+WHERE continent IS NOT null
+GROUP BY location
+ORDER BY TotalDeathCount DESC
+
+----LET'S BREAK THINGS DOWN BY CONTINENTS
+
+SELECT continent, MAX(total_deaths) AS TotalDeathCount
+FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths`
+--WHERE location LIKE '%Canada%'
+WHERE continent IS NOT null
+GROUP BY continent
+ORDER BY TotalDeathCount DESC
+
+--
+
+
+
+
+
 
 
 
