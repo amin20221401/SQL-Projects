@@ -78,7 +78,25 @@ JOIN `my-project-91151-01.SQL01_Data_Exploration.CovidVaccination` AS Vac
 WHERE Dea.continent IS NOT NULL  
 ORDER BY 2,3
 
-----
+------ Finding the vaccination number compare to the population.(Using CTE)
+
+WITH Population_Vs_Vaccination --in BigQuery you don't need to add these columns(continent, location, date, population, new_vaccinations, People_Vaccinated_RollingCount)
+AS 
+(
+SELECT Dea.continent, Dea.location, Dea.date, Dea.population, Vac.new_vaccinations,
+SUM(Vac.new_vaccinations) OVER (PARTITION BY Dea.location ORDER BY Dea.date, Dea.location)
+ AS People_Vaccinated_RollingCount
+FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths` AS Dea
+JOIN `my-project-91151-01.SQL01_Data_Exploration.CovidVaccination` AS Vac
+  ON Dea.location = Vac.location
+  AND Dea.date = Vac.date
+WHERE Dea.continent IS NOT NULL 
+)
+--ORDER BY 2,3
+SELECT * , (People_Vaccinated_RollingCount / population) * 100 AS Vaccination_Population_Percentage
+FROM Population_Vs_Vaccination
+
+------
 
 
 
