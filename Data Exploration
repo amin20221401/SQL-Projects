@@ -39,7 +39,7 @@ WHERE continent IS NOT null
 GROUP BY continent
 ORDER BY TotalDeathCount DESC
 
---Take a look at "North America" death per populatipon over countries.
+----Take a look at "North America" death per populatipon over countries.
 
 SELECT location, continent, MAX(total_deaths) AS TotalDeathCount
 FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths`
@@ -48,7 +48,25 @@ WHERE continent = 'North America'
 GROUP BY continent, location
 ORDER BY TotalDeathCount DESC
 
+--Global Overview
 
+SELECT date, SUM(new_cases) AS TotalCases,SUM(new_deaths) AS TotalDeaths, (SUM(new_deaths) / SUM(new_cases))*100 AS DeathPercentage
+FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths`
+--WHERE location LIKE '%Canada%' and
+WHERE continent IS NOT NULL 
+GROUP BY date
+ORDER BY 1,2
+
+---- Global Overview (Summary)
+
+SELECT SUM(new_cases) AS TotalCases,SUM(new_deaths) AS TotalDeaths, (SUM(new_deaths) / SUM(new_cases))*100 AS DeathPercentage
+FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths`
+--WHERE location LIKE '%Canada%' and
+WHERE continent IS NOT NULL 
+--GROUP BY date
+ORDER BY 1,2
+
+--
 
 
 
