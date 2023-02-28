@@ -39,7 +39,14 @@ WHERE continent IS NOT null
 GROUP BY continent
 ORDER BY TotalDeathCount DESC
 
---
+--Take a look at "North America" death per populatipon over countries.
+
+SELECT location, continent, MAX(total_deaths) AS TotalDeathCount
+FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths`
+--WHERE location LIKE '%Canada%'
+WHERE continent = 'North America'
+GROUP BY continent, location
+ORDER BY TotalDeathCount DESC
 
 
 
