@@ -30,6 +30,7 @@ GROUP BY location
 ORDER BY TotalDeathCount DESC
 
 ----LET'S BREAK THINGS DOWN BY CONTINENTS
+----Showing continent with the highest death count per population
 
 SELECT continent, MAX(total_deaths) AS TotalDeathCount
 FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths`
