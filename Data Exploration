@@ -96,7 +96,18 @@ WHERE Dea.continent IS NOT NULL
 SELECT * , (People_Vaccinated_RollingCount / population) * 100 AS Vaccination_Population_Percentage
 FROM Population_Vs_Vaccination
 
-------
+-- Creating view for data visualization.
+
+CREATE VIEW my-project-91151-01.SQL01_Data_Exploration.Population_Vs_Vaccination AS
+SELECT Dea.continent, Dea.location, Dea.date, Dea.population, Vac.new_vaccinations,
+SUM(Vac.new_vaccinations) OVER (PARTITION BY Dea.location ORDER BY Dea.date, Dea.location)
+ AS People_Vaccinated_RollingCount
+FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths` AS Dea
+JOIN `my-project-91151-01.SQL01_Data_Exploration.CovidVaccination` AS Vac
+  ON Dea.location = Vac.location
+  AND Dea.date = Vac.date
+WHERE Dea.continent IS NOT NULL 
+--ORDER BY 2,3
 
 
 
