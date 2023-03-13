@@ -1,19 +1,19 @@
-# Covid 19 Data Exploration ,
-# Skills used: Joins, CTE's, Windows Functions, Aggregate Functions, Creating Views,
+ Covid 19 Data Exploration ,
+ Skills used: Joins, CTE's, Windows Functions, Aggregate Functions, Creating Views,
 
---# Looking at the data.
+-- Looking at the data.
 
 SELECT location, date, total_cases, new_cases, total_deaths, population
 FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths` LIMIT 1000
 
--- # It is Finding death percentage over total deaths and total cases. Also it shows the death percentage in Canada.
+--  It is Finding death percentage over total deaths and total cases. Also it shows the death percentage in Canada.
 
 SELECT location, date, total_cases, total_deaths, (total_deaths / total_cases) * 100 AS DeathPercentage
 FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths`
 WHERE location LIKE '%Canada%'
 ORDER BY 1,2
 
---# Finding the highest infection rate at countries compared to population. Line 18 could be optional and we can put each country.
+-- Finding the highest infection rate at countries compared to population. Line 18 could be optional and we can put each country.
 
 SELECT location, max(total_cases) AS HighestInfectionRate, population, max((total_cases / population)) * 100 AS PercentagePopulationInfected
 FROM `my-project-91151-01.SQL01_Data_Exploration.CovidDeaths`
