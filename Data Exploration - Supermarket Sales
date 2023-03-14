@@ -1,1 +1,41 @@
+--Data Exploration
+-- Supermarket Sales
+
+SELECT *
+FROM dbo.supermarket_sales
+
+-- 1-How many invoice is there in each branch?
+
+SELECT City, Branch,  COUNT(City) AS Invoice_Count
+FROM dbo.supermarket_sales
+GROUP BY Branch, City
+ORDER BY Invoice_Count
+
+--2-What type of customer types are there in each branch?
+
+SELECT Branch,City,[Customer type] ,COUNT(Branch) AS CustomerType_Count
+FROM dbo.supermarket_sales
+GROUP BY [Customer type] , Branch, City
+ORDER BY Branch, CustomerType_Count
+
+-- What kind of product lines are there in each branch?
+
+SELECT  [Product line], Branch,  COUNT(Branch) AS ProductLine_Count
+FROM dbo.supermarket_sales
+GROUP BY ([Product line]), Branch
+ORDER BY Branch, ProductLine_Count
+
+--What is the total sales in each branch?
+
+SELECT Branch, SUM(Total) AS TotalSales_Branch
+FROM dbo.supermarket_sales
+GROUP BY   Branch
+ORDER BY  TotalSales_Branch DESC
+
+-- What is the total sales for each product line in each branch?
+
+SELECT [Product line],Branch,  SUM(Total) AS TotalSales_ProductLine_Branch
+FROM dbo.supermarket_sales
+GROUP BY  [Product line], Branch
+ORDER BY Branch, TotalSales_ProductLine_Branch
 
